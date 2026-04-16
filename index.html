@@ -1699,30 +1699,32 @@
    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxK9tPh3PJUAlEkk5JVJTWXDe7OZNhhANeovKE1kef11d6ruROSVqzZ6YshXN9sjHge3w/exec';
 
   function enviarDatos(evento) {
-    fetch('https://ipwho.is/')
-      .then(res => res.json())
-      .then(geo => {
-        const data = {
-          evento:      evento,
-          timestamp:   new Date().toISOString(),
-          ip:          geo.ip,           // ← cambió de geo.query
-          pais:        geo.country,
-          ciudad:      geo.city,
-          region:      geo.region,       // ← cambió de geo.regionName
-          isp:         geo.connection?.isp || '',  // ← cambió de geo.isp
-          dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Desktop',
-          navegador:   navigator.userAgent.split(') ')[0].split('(')[0].trim(),
-          idioma:      navigator.language,
-          resolucion:  `${screen.width}x${screen.height}`,
-          fuente:      document.referrer || 'Directo'
-        };
-        fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify(data)
-        });
+  fetch('https://ipwho.is/')
+    .then(res => res.json())
+    .then(geo => {
+      console.log('GEO:', geo); // ← ver qué devuelve en consola
+      const data = {
+        evento:      evento,
+        timestamp:   new Date().toISOString(),
+        ip:          geo.ip,
+        pais:        geo.country,
+        ciudad:      geo.city,
+        region:      geo.region,
+        isp:         geo.connection?.isp || '',
+        dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Desktop',
+        navegador:   navigator.userAgent.split(') ')[0].split('(')[0].trim(),
+        idioma:      navigator.language,
+        resolucion:  `${screen.width}x${screen.height}`,
+        fuente:      document.referrer || 'Directo'
+      };
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(data)
       });
-  }
+    })
+    .catch(err => console.error('Error ipwho:', err)); // ← ver el error
+}
 
   // Page view al cargar
   enviarDatos('page_view');
