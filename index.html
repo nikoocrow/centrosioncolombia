@@ -1699,17 +1699,17 @@
    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxK9tPh3PJUAlEkk5JVJTWXDe7OZNhhANeovKE1kef11d6ruROSVqzZ6YshXN9sjHge3w/exec';
 
   function enviarDatos(evento) {
-    fetch('https://ip-api.com/json/')
+    fetch('https://ipwho.is/')
       .then(res => res.json())
       .then(geo => {
         const data = {
           evento:      evento,
           timestamp:   new Date().toISOString(),
-          ip:          geo.query,
+          ip:          geo.ip,           // ← cambió de geo.query
           pais:        geo.country,
           ciudad:      geo.city,
-          region:      geo.regionName,
-          isp:         geo.isp,
+          region:      geo.region,       // ← cambió de geo.regionName
+          isp:         geo.connection?.isp || '',  // ← cambió de geo.isp
           dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'Móvil' : 'Desktop',
           navegador:   navigator.userAgent.split(') ')[0].split('(')[0].trim(),
           idioma:      navigator.language,
