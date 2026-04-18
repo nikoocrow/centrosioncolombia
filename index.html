@@ -992,6 +992,64 @@
       letter-spacing: .12em;
       color: var(--text-muted);
     }
+    .testimony-slider {
+      position: relative;
+    }
+    .testimony-slide {
+      display: none;
+    }
+    .testimony-slide.active {
+      display: block;
+      animation: tslidein 0.75s ease both;
+    }
+    @keyframes tslidein {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .testimony-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2.5rem;
+    }
+    .t-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: rgba(201,168,76,.25);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background .3s, transform .3s;
+    }
+    .t-dot.active {
+      background: var(--gold);
+      transform: scale(1.35);
+    }
+    .testimony-photo {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem auto 0;
+    }
+    .testimony-photo-ring {
+      position: relative;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(201,168,76,.4);
+      box-shadow: 0 0 0 6px rgba(201,168,76,.08);
+    }
+    .testimony-photo-ring img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .testimony-photo-ring::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 55%);
+      border-radius: 50%;
+    }
 
     /* ══════════════════════════════════════════════════════
        GLOBAL REACH
@@ -1721,38 +1779,109 @@
 <section id="testimony">
   <div class="container">
     <div class="testimony-inner">
-      <p class="section-label reveal">Testimonio</p>
+      <p class="section-label reveal">Testimonios</p>
       <div class="divider reveal">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M8 0 L9.6 6.4 L16 8 L9.6 9.6 L8 16 L6.4 9.6 L0 8 L6.4 6.4 Z" fill="#c9a84c" opacity=".6"/>
         </svg>
       </div>
-      <span class="quote-mark reveal">"</span>
-      <p class="testimony-text reveal reveal-delay-1">
-        Aunque en el pasado estudié la Biblia en diversos centros, no había recibido
-        una enseñanza tan clara, estructurada y reveladora sobre el cumplimiento de
-        las profecías y el significado del Apocalipsis.
-      </p>
-      <p class="testimony-text-2 reveal reveal-delay-2">
-        Hoy cuento con las herramientas necesarias para impartir la palabra con mayor
-        precisión y profundidad, guiando a los miembros hacia una comprensión más
-        sólida y fundamentada de las Escrituras.
-      </p>
-      <div class="reveal reveal-delay-3" style="display:flex;justify-content:center;margin:2.5rem auto 0;">
-        <div style="position:relative;width:160px;height:160px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,76,.4);box-shadow:0 0 0 6px rgba(201,168,76,.08);">
-          <img src="tetimonio.jpg" alt="Testimonio" style="width:100%;height:100%;object-fit:cover;display:block;"/>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45) 0%,transparent 55%);border-radius:50%;"></div>
+
+      <div class="testimony-slider" id="testimonySlider">
+
+        <!-- ── Slide 1 ── -->
+        <div class="testimony-slide active">
+          <span class="quote-mark">"</span>
+          <p class="testimony-text">
+            Aunque en el pasado estudié la Biblia en diversos centros, no había recibido
+            una enseñanza tan clara, estructurada y reveladora sobre el cumplimiento de
+            las profecías y el significado del Apocalipsis.
+          </p>
+          <p class="testimony-text-2">
+            Hoy cuento con las herramientas necesarias para impartir la palabra con mayor
+            precisión y profundidad, guiando a los miembros hacia una comprensión más
+            sólida y fundamentada de las Escrituras.
+          </p>
+          <div class="testimony-photo">
+            <div class="testimony-photo-ring">
+              <img src="testimonio.jpg" alt="Pastor Edilberto Sosa"/>
+            </div>
+          </div>
+          <div class="testimony-author">
+            <div class="author-line"></div>
+            <div class="author-name">Pastor Edilberto Sosa</div>
+            <div class="author-title">Pastor — Estudiante graduado</div>
+          </div>
+          <p style="margin-top:3rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:rgba(255,255,255,.5); max-width:580px; margin-left:auto; margin-right:auto;">
+            "Extiendo una invitación a los pastores a escuchar esta enseñanza y a transmitir
+            este alimento espiritual renovado a las ovejas del Señor."
+          </p>
         </div>
+
+        <!-- ── Slide 2 ── -->
+        <div class="testimony-slide">
+          <span class="quote-mark">"</span>
+          <p class="testimony-text">
+            Me he graduado de la academia y tengo la bendición de servir en mi
+            congregación, con quienes comparto cada día de la semana la palabra que he
+            aprendido en la academia. Ellos ahora están más animados con la palabra y ver
+            su motivación me impulsa a seguir adelante; de hecho, varios de mis miembros
+            después de yo aprender también quisieron formarse en la academia.
+          </p>
+          <p class="testimony-text-2">
+            Mi deseo de llevar este mensaje con claridad es tan grande que hoy me entrego
+            por completo a esta educación, reconociendo que para guiar a otros, primero
+            debo ser formado con la verdad.
+          </p>
+          <div class="testimony-photo">
+            <div class="testimony-photo-ring">
+              <img src="testimonio2.jpg" alt="Pastor Jairo Manuel Epieyu"/>
+            </div>
+          </div>
+          <div class="testimony-author">
+            <div class="author-line"></div>
+            <div class="author-name">Pastor Jairo Manuel Epieyu</div>
+            <div class="author-title">Pastor — Estudiante graduado</div>
+          </div>
+        </div>
+
+        <!-- ── Slide 3 ── -->
+        <div class="testimony-slide">
+          <span class="quote-mark">"</span>
+          <p class="testimony-text">
+            La academia Sion llegó a mi vida en un momento en el cual me sentía un poco
+            desanimada por muchas cosas que veía en el mundo y no estaban alentando mi
+            vida de fe, pero cuando llegué aquí Dios vivificó mi corazón e hizo grandes
+            maravillas en mi vida.
+          </p>
+          <p class="testimony-text-2">
+            Hoy mi familia, mi esposo, mi hijo y yo servimos al Señor de la manera que
+            Dios ha convenido que le sirvamos, en espíritu y en verdad, a través de
+            entender mejor su palabra. Nuestros congregados también están recibiendo esta
+            palabra y se sienten muy contentos porque sus vidas han cambiado y su fe ha
+            crecido. Realmente es la mejor palabra que hemos podido aprender y se ha
+            podido revelar en estos tiempos.
+          </p>
+          <div class="testimony-photo">
+            <div class="testimony-photo-ring">
+              <img src="testimonio3.jpg" alt="Pastora Yomaira Parra"/>
+            </div>
+          </div>
+          <div class="testimony-author">
+            <div class="author-line"></div>
+            <div class="author-name">Pastora Yomaira Parra</div>
+            <div class="author-title">Pastora — Estudiante graduada</div>
+          </div>
+        </div>
+
+      </div><!-- /testimony-slider -->
+
+      <!-- Dots navigation -->
+      <div class="testimony-dots" id="testimonyDots">
+        <button class="t-dot active" data-idx="0" aria-label="Testimonio 1"></button>
+        <button class="t-dot" data-idx="1" aria-label="Testimonio 2"></button>
+        <button class="t-dot" data-idx="2" aria-label="Testimonio 3"></button>
       </div>
-      <div class="testimony-author reveal reveal-delay-3">
-        <div class="author-line"></div>
-        <div class="author-name">Pastor Edilberto Sosa</div>
-        <div class="author-title">Pastor — Estudiante graduado</div>
-      </div>
-      <p style="margin-top:3rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:rgba(255,255,255,.5); max-width:580px; margin-left:auto; margin-right:auto;" class="reveal reveal-delay-4">
-        "Extiendo una invitación a los pastores a escuchar esta enseñanza y a transmitir
-        este alimento espiritual renovado a las ovejas del Señor."
-      </p>
+
     </div>
   </div>
 </section>
@@ -2165,6 +2294,36 @@
         .attr('fill', 'rgba(201,168,76,.4)')
         .text('No se pudo cargar el mapa.');
     });
+})();
+
+// ── Testimony slider ──────────────────────────────────────
+(function () {
+  const slides = document.querySelectorAll('.testimony-slide');
+  const dots   = document.querySelectorAll('.t-dot');
+  let current  = 0;
+  let timer;
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function next() { goTo((current + 1) % slides.length); }
+
+  function startAuto() { timer = setInterval(next, 6000); }
+  function resetAuto()  { clearInterval(timer); startAuto(); }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.dataset.idx, 10));
+      resetAuto();
+    });
+  });
+
+  startAuto();
 })();
 </script>
 </body>
